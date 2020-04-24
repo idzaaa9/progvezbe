@@ -2,7 +2,13 @@
 
 using namespace std;
 
-enum TipPreliva{COKOLADNI = 1, COKOLADNI_SA_SLAGOM = 2};
+enum TipPreliva{COKOLADNI, COKOLADNI_SA_SLAGOM};
+
+const string& enumToString(TipPreliva a){
+    static string naziv[] = {"Cokoladni", "Cokoladni sa Slagom"};
+    return (naziv[a]);
+}
+
 class Preliv{
 private:
     TipPreliva tip;
@@ -37,23 +43,28 @@ public:
 };
 
 void ispisiPreliv(const Preliv& naziv){
-    cout << "--------------" << endl << naziv.getTip() << endl << "--------------" << endl;
+    cout << "--------------" << endl << enumToString(naziv.getTip()) << endl << "--------------" << endl;
 }
 
+enum Stanje{U_PRIPREMI, PECE_SE, ZAGOREO, PRIPREMLJEN};
 
-/**enum KolacStanje{ZAGOREO = 0, PECE_SE = 1, U_PRIPREMI = 2, PRIPREMLJEN = 3}
 class Kolac{
 private:
-    KolacStanje stanje;
-    int temperatura;
     Preliv preliv;
+    Stanje stanje;
+    int temperatura;
 public:
-    Kolac()
-};*/
+    Kolac(){
+        temperatura = 20;
+        stanje = U_PRIPREMI;
+        preliv.tip = COKOLADNI;
+    }
+};
 
 int main()
 {
     Preliv a;
     ispisiPreliv(a);
+    Kolac a;
     return 0;
 }
